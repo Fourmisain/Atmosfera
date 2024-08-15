@@ -62,11 +62,11 @@ public record PercentBlockModifier(float lowerVolumeSlider, float upperVolumeSli
         JsonHelper.getArray(object, "blocks").forEach(block -> {
             // Registers only the loaded IDs to avoid false triggers.
             if (block.getAsString().startsWith("#")) {
-                Identifier tagId = new Identifier(block.getAsString().substring(1));
+                Identifier tagId = Identifier.of(block.getAsString().substring(1));
                 TagKey<Block> tagKey = TagKey.of(RegistryKeys.BLOCK, tagId);
                 tags.add(tagKey);
             } else {
-                Identifier blockId = new Identifier(block.getAsString());
+                Identifier blockId = Identifier.of(block.getAsString());
 
                 if (Registries.BLOCK.containsId(blockId)) {
                     Block b = Registries.BLOCK.get(blockId);

@@ -69,7 +69,7 @@ public class AtmosferaConfig {
 			if (json.has("volumes")) {
 				for (Map.Entry<String, JsonElement> element : json.get("volumes").getAsJsonObject().entrySet()) {
 					if (element.getValue().isJsonPrimitive()) {
-						VOLUME_MODIFIERS.put(new Identifier(element.getKey()), element.getValue().getAsInt());
+						VOLUME_MODIFIERS.put(Identifier.of(element.getKey()), element.getValue().getAsInt());
 					}
 				}
 			}
@@ -77,7 +77,7 @@ public class AtmosferaConfig {
 			if (json.has("subtitles")) {
 				for (Map.Entry<String, JsonElement> element : json.get("subtitles").getAsJsonObject().entrySet()) {
 					if (element.getValue().isJsonPrimitive()) {
-						SUBTITLE_MODIFIERS.put(new Identifier(element.getKey()), element.getValue().getAsBoolean());
+						SUBTITLE_MODIFIERS.put(Identifier.of(element.getKey()), element.getValue().getAsBoolean());
 					}
 				}
 			}
@@ -181,7 +181,7 @@ public class AtmosferaConfig {
 				Text.translatable("text.cloth-config.reset_value"), Text.translatable("config.subcategory.atmosfera.music"))
 				.setExpanded(true);
 
-		builder.setDefaultBackgroundTexture(new Identifier("minecraft:textures/block/light_blue_stained_glass.png"));
+		builder.setDefaultBackgroundTexture(Identifier.of("minecraft:textures/block/light_blue_stained_glass.png"));
 		ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
 		for (Map.Entry<Identifier, Integer> sound : VOLUME_MODIFIERS.entrySet()) {
