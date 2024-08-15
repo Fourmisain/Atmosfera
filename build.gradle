@@ -1,14 +1,14 @@
 plugins {
-    id 'fabric-loom' version '1.2-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
 
 repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
@@ -46,8 +46,8 @@ processResources {
     }
 }
 
-tasks.withType(JavaCompile) {
-    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+tasks.withType(JavaCompile).configureEach {
+    it.options.compilerArgs.add('-Xlint:deprecation')
     it.options.release = 17
 }
 
@@ -56,11 +56,14 @@ java {
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+        rename { "${it}_${project.base.archivesName.get()}"}
     }
 }
 
