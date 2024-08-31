@@ -61,9 +61,9 @@ public record PercentBiomeModifier(float min, float max, ImmutableCollection<Reg
 
         JsonHelper.getArray(object, "biomes").forEach(biome -> {
             if (biome.getAsString().startsWith("#")) {
-                tags.add(new Identifier(biome.getAsString().substring(1)));
+                tags.add(Identifier.of(biome.getAsString().substring(1)));
             } else {
-                Identifier biomeID = new Identifier(biome.getAsString());
+                Identifier biomeID = Identifier.of(biome.getAsString());
                 biomes.add(biomeID);
             }
         });

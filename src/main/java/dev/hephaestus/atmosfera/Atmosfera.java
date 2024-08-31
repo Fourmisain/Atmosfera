@@ -75,6 +75,6 @@ public class Atmosfera implements ClientModInitializer {
 	}
 
 	public static Identifier id(@NotNull String path, String... paths) {
-		return new Identifier(MODID, path + (paths.length == 0 ? "" : "." + String.join(".", paths)));
+		return Identifier.of(MODID, path + (paths.length == 0 ? "" : "." + String.join(".", paths)));
 	}
 }

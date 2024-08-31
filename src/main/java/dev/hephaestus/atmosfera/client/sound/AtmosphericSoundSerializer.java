@@ -34,7 +34,7 @@ public record AtmosphericSoundSerializer(String sourceFolder, Map<Identifier, At
         JsonParser parser = new JsonParser();
 
         for (Identifier resource : resources.keySet()) {
-            Identifier id = new Identifier(
+            Identifier id = Identifier.of(
                     resource.getNamespace(),
                     resource.getPath().substring(
                             resource.getPath().indexOf("definitions/") + 12,
@@ -45,7 +45,7 @@ public record AtmosphericSoundSerializer(String sourceFolder, Map<Identifier, At
             try {
                 JsonObject json = parser.parse(new InputStreamReader(resources.get(resource).getInputStream())).getAsJsonObject();
 
-                Identifier soundId = new Identifier(JsonHelper.getString(json, "sound"));
+                Identifier soundId = Identifier.of(JsonHelper.getString(json, "sound"));
 
                 EnvironmentContext.Shape shape = getShape(json, id);
                 EnvironmentContext.Size size = getSize(json, id);

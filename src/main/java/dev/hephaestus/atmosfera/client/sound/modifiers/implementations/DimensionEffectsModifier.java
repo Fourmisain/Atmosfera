@@ -19,6 +19,6 @@ public record DimensionEffectsModifier(Identifier skyProperties) implements Atmo
 
     public static Factory create(JsonObject object) {
         // Valid options here for vanilla are "overworld", "the_nether", and "the_end"
-        return new DimensionEffectsModifier(new Identifier(object.get("id").getAsString()));
+        return new DimensionEffectsModifier(Identifier.of(object.get("id").getAsString()));
     }
 }
