@@ -39,10 +39,12 @@ public record RidingCondition(ImmutableList<EntityType<?>> types) implements Atm
         JsonElement value = object.get("value");
 
         if (value.isJsonPrimitive()) {
-            Registries.ENTITY_TYPE.getOrEmpty(Identifier.of(value.getAsString())).ifPresent(types::add);
+            Identifier id = Identifier.of(value.getAsString());
+            Registries.ENTITY_TYPE.getOptionalValue(id).ifPresent(types::add);
         } else if (value.isJsonArray()) {
             for (JsonElement e : value.getAsJsonArray()) {
-                Registries.ENTITY_TYPE.getOrEmpty(Identifier.of(e.getAsString())).ifPresent(types::add);
+                Identifier id = Identifier.of(e.getAsString());
+                Registries.ENTITY_TYPE.getOptionalValue(id).ifPresent(types::add);
             }
         }
 

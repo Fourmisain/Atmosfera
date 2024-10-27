@@ -31,7 +31,7 @@ public class MixinClientWorld implements ClientWorldDuck {
     private boolean atmosfera$initialized;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void initializeSoundHandler(ClientPlayNetworkHandler netHandler, ClientWorld.Properties properties, RegistryKey<World> registryRef, RegistryEntry<DimensionType> registryEntry, int loadDistance, int simulationDistance, Supplier<Profiler> profiler, WorldRenderer worldRenderer, boolean debugWorld, long seed, CallbackInfo ci) {
+    private void initializeSoundHandler(ClientPlayNetworkHandler networkHandler, ClientWorld.Properties properties, RegistryKey<World> registryRef, RegistryEntry<DimensionType> dimensionType, int loadDistance, int simulationDistance, WorldRenderer worldRenderer, boolean debugWorld, long seed, int seaLevel, CallbackInfo ci) {
         this.atmosfera$soundHandler = new AtmosphericSoundHandler((ClientWorld) (Object) this);
     }
 

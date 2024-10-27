@@ -98,7 +98,7 @@ public class AtmosphericSoundHandler {
 
         if (world != null && MinecraftClient.getInstance().options.getSoundVolume(SoundCategory.MUSIC) > 0 && MinecraftClient.getInstance().player != null && world.atmosfera$isEnvironmentContextInitialized()) {
             SoundManager soundManager = MinecraftClient.getInstance().getSoundManager();
-            int total = Objects.requireNonNull(soundManager.get(defaultSound.getSound().value().getId())).getWeight();
+            int total = Objects.requireNonNull(soundManager.get(defaultSound.getSound().value().id())).getWeight();
 
             List<Pair<Integer, MusicSound>> sounds = new ArrayList<>();
             sounds.add(new Pair<>(total, defaultSound));
